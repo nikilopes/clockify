@@ -7,9 +7,6 @@
       "default_popup": "popup.html",
       "default_icon": "clockify-logo.png"
     },
-    "content_scripts": [{
-      "matches": ["http://*/*", "https://*/*"]
-    }],
     "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
     "commands": {
       "_execute_browser_action": {
