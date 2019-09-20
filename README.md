@@ -1,11 +1,10 @@
 # clockify
 Chrome extension clockify
 
-- scaricare il progetto
-- andare su https://clockify.me/user/settings e trovare la propria api key
-- settare l'api key sul file popup.js
-- andare su chrome://extensions/
-- in alto a desta abilitare modalità sviluppatore
-- cliccare in alto a sinistra su 'carica estensione non pacchettizata' e caricare il progetto
-- in alto a destra dovrebbe essere comparita l'icona di clockify
+- download the chrome extension
+- go to https://clockify.me/user/settings and find the api key
+- go to chrome://extensions/
+- enable developer mode
+- click on upload extension unpacked and upload the build of project
+- set the api kei in option of extension
 - ICCHEALEAO
