@@ -16,17 +16,19 @@ class Options extends React.Component {
 
     handleSubmit(event) {
         this.save_options(this.state.value);
-        event.preventDefault();
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label>
-                    X-Api-Key:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
+                <div className="form-group">
+                    <label htmlFor="select-project">X-Api-Key:</label>
+                    <input type="text"
+                           value={this.state.value}
+                           className="form-control custom-input"
+                           onChange={this.handleChange} />
+                </div>
+                <input id="button-options" className="btn col-sm-2 btn-primary" type="submit" value="Submit" />
             </form>
         );
     }
@@ -36,9 +38,11 @@ class Options extends React.Component {
     }
 
     save_options(apiKey) {
+        console.log("save options", apiKey);
         chrome.storage.sync.set({
             api_key: apiKey,
         }, function () {});
+        this.props.handler;
     }
 
 
