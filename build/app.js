@@ -241,7 +241,9 @@ function (_React$Component) {
       tag: '',
       projects: [],
       tags: [],
-      loaderEnabled: false
+      loaderEnabled: false,
+      startTime: "08:00",
+      endTime: "08:00"
     };
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -263,24 +265,40 @@ function (_React$Component) {
       var description = this.state.description;
       var project = this.state.project;
       var tag = this.state.tag;
-      this.sendTimeTracker(project, tag, description);
+      var startTime = this.state.startTime;
+      var endTime = this.state.endTime;
+      this.sendTimeTracker(project, tag, description, startTime, endTime);
       event.preventDefault();
     }
   }, {
     key: "sendTimeTracker",
-    value: function sendTimeTracker(project, tag, description) {
+    value: function sendTimeTracker(project, tag, description, startTime, endTime) {
       this.setState({
         loaderEnabled: true
       });
-      var timeStart = new Date().setHours(9, 0, 0, 0);
-      var timeEnd = new Date().setHours(17, 0, 0, 0);
+      var timeStart;
+      var timeEnd;
+
+      if (!this.state.enableCustomHourChecked) {
+        timeStart = this.state.startTimeDef;
+        timeEnd = this.state.endTimeDef;
+      } else {
+        timeStart = startTime;
+        timeEnd = endTime;
+      }
+
+      console.log(startTime + "|" + endTime);
+      var now = Date.now();
+      var dateStart = Index.formatDate(now) + "T" + timeStart + ":00";
+      var dateEnd = Index.formatDate(now) + "T" + timeEnd + ":00";
+      console.log(dateStart + "|" + dateEnd);
       var $this = this;
       var body = {
-        "start": new Date(timeStart).toISOString(),
+        "start": new Date(dateStart).toISOString(),
         "billable": "true",
         "description": description,
         "projectId": project,
-        "end": new Date(timeEnd).toISOString(),
+        "end": new Date(dateEnd).toISOString(),
         "tagIds": [tag]
       };
       fetch("".concat(CLOCKIFY_ENDPOINT, "workspaces/").concat(workspaceID, "/time-entries"), {
@@ -290,7 +308,9 @@ function (_React$Component) {
       }).then(function (response) {
         $this.setState({
           description: '',
-          loaderEnabled: false
+          loaderEnabled: false,
+          startTime: "08:00",
+          endTime: "08:00"
         });
         document.getElementById('button-send').disabled = true;
       });
@@ -300,9 +320,21 @@ function (_React$Component) {
     value: function componentDidMount() {
       var $this = this;
       chrome.storage.sync.get({
-        api_key: ''
+        api_key: '',
+        enableCustomHourChecked: false,
+        startTimeDef: "09:00",
+        endTimeDef: "17:00"
       }, function (items) {
         headersClockify['x-api-key'] = items.api_key;
+        $this.setState({
+          enableCustomHourChecked: items.enableCustomHourChecked
+        });
+        $this.setState({
+          startTimeDef: items.startTimeDef
+        });
+        $this.setState({
+          endTimeDef: items.endTimeDef
+        });
         console.log("items.api_key;", items.api_key);
 
         if (items.api_key) {
@@ -398,7 +430,41 @@ function (_React$Component) {
         className: "form-control custom-input",
         value: this.state.description,
         onChange: this.handleInputChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), this.state.enableCustomHourChecked ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "startTime"
+      }, "Start Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "time",
+        id: "startTime",
+        name: "startTime",
+        style: {
+          marginLeft: '0.8rem'
+        },
+        min: "08:00",
+        max: "20:00",
+        defaultValue: "08:00",
+        onChange: this.handleInputChange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "endTime"
+      }, "End Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "time",
+        id: "endTime",
+        name: "endTime",
+        style: {
+          marginLeft: '0.8rem'
+        },
+        min: "08:00",
+        max: "20:00",
+        defaultValue: "08:00",
+        onChange: this.handleInputChange,
+        required: true
+      }))) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "button-send",
         className: "btn col-sm-2 btn-primary",
         type: "submit",
@@ -414,6 +480,17 @@ function (_React$Component) {
         className: "hero__extra-img animate-relaxation",
         src: "https://clockify.me/assets/images/extra-features-work-illustration.svg"
       }))));
+    }
+  }], [{
+    key: "formatDate",
+    value: function formatDate(date) {
+      var d = new Date(date),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      return [year, month, day].join('-');
     }
   }]);
 
@@ -436,6 +513,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -469,6 +548,9 @@ function (_React$Component) {
     _this.state = {
       value: ''
     };
+    _this.state = {
+      enableCustomHourChecked: false
+    };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -477,14 +559,24 @@ function (_React$Component) {
   _createClass(Options, [{
     key: "handleChange",
     value: function handleChange(event) {
-      this.setState({
-        value: event.target.value
-      });
+      var target = event.target;
+      var value = target.value;
+      var name = target.name;
+
+      if (name === "enableCustomHour") {
+        console.log(name + "|" + this.state.enableCustomHourChecked);
+        this.setState({
+          enableCustomHourChecked: !this.state.enableCustomHourChecked
+        });
+      } else {
+        console.log(name + "|" + value);
+        this.setState(_defineProperty({}, name, value));
+      }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
-      this.save_options(this.state.value);
+      this.save_options(this.state.value, this.state.enableCustomHourChecked, this.state.startTime, this.state.endTime);
     }
   }, {
     key: "render",
@@ -498,9 +590,54 @@ function (_React$Component) {
       }, "X-Api-Key:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.value,
+        name: "value",
         className: "form-control custom-input",
         onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "customHour"
+      }, "Enable Custom Hour"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        name: "enableCustomHour",
+        style: {
+          marginLeft: '0.8rem'
+        },
+        onChange: this.handleChange,
+        checked: this.state.enableCustomHourChecked
+      })), !this.state.enableCustomHourChecked ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "startTime"
+      }, "Start Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "time",
+        id: "startTime",
+        name: "startTime",
+        style: {
+          marginLeft: '0.8rem'
+        },
+        min: "08:00",
+        max: "20:00",
+        onChange: this.handleChange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "endTime"
+      }, "End Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "time",
+        id: "endTime",
+        name: "endTime",
+        style: {
+          marginLeft: '0.8rem'
+        },
+        min: "08:00",
+        max: "20:00",
+        onChange: this.handleChange,
+        required: true
+      }))) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "button-options",
         className: "btn col-sm-2 btn-primary",
         type: "submit",
@@ -513,11 +650,23 @@ function (_React$Component) {
       this.restore_options();
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState, snapshot) {
+      if (!this.state.enableCustomHourChecked && this.state.startTime !== "undefined") {
+        console.log(this.state.startTime + "|" + this.state.endTime);
+        document.getElementById('startTime').value = this.state.startTime;
+        document.getElementById('endTime').value = this.state.endTime;
+      }
+    }
+  }, {
     key: "save_options",
-    value: function save_options(apiKey) {
+    value: function save_options(apiKey, enableCustomHourChecked, startTimeDef, endTimeDef) {
       console.log("save options", apiKey);
       chrome.storage.sync.set({
-        api_key: apiKey
+        api_key: apiKey,
+        enableCustomHourChecked: enableCustomHourChecked,
+        startTimeDef: startTimeDef,
+        endTimeDef: endTimeDef
       }, function () {});
       this.props.handler;
     }
@@ -526,10 +675,22 @@ function (_React$Component) {
     value: function restore_options() {
       var $this = this;
       chrome.storage.sync.get({
-        api_key: ''
+        api_key: '',
+        enableCustomHourChecked: false,
+        startTimeDef: "09:00",
+        endTimeDef: "17:00"
       }, function (items) {
         $this.setState({
           value: items.api_key
+        });
+        $this.setState({
+          enableCustomHourChecked: items.enableCustomHourChecked
+        });
+        $this.setState({
+          startTime: items.startTimeDef
+        });
+        $this.setState({
+          endTime: items.endTimeDef
         });
       });
     }
