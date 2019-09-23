@@ -431,9 +431,9 @@ function (_React$Component) {
         value: this.state.description,
         onChange: this.handleInputChange
       })), this.state.enableCustomHourChecked ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mb-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "startTime"
       }, "Start Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -441,7 +441,7 @@ function (_React$Component) {
         id: "startTime",
         name: "startTime",
         style: {
-          marginLeft: '0.8rem'
+          marginLeft: '0'
         },
         min: "08:00",
         max: "20:00",
@@ -449,7 +449,7 @@ function (_React$Component) {
         onChange: this.handleInputChange,
         required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "endTime"
       }, "End Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -457,7 +457,7 @@ function (_React$Component) {
         id: "endTime",
         name: "endTime",
         style: {
-          marginLeft: '0.8rem'
+          marginLeft: '0'
         },
         min: "08:00",
         max: "20:00",
@@ -606,9 +606,9 @@ function (_React$Component) {
         onChange: this.handleChange,
         checked: this.state.enableCustomHourChecked
       })), !this.state.enableCustomHourChecked ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row mb-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "startTime"
       }, "Start Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -623,7 +623,7 @@ function (_React$Component) {
         onChange: this.handleChange,
         required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "endTime"
       }, "End Time"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -753,7 +753,7 @@ exports.push([module.i, "/*!\n * Bootstrap v4.3.1 (https://getbootstrap.com/)\n 
 
 exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "html,\nbody {\n    width: 300px;\n    padding: 0;\n    overflow-x: hidden;\n    margin: 0;\n    background: linear-gradient(140deg, #1840D0 16%, rgba(0, 0, 0, 0) 24%), linear-gradient(30deg, #244FEA 0%, #173FCD 100%);\n}\n\nform {\n    margin: 15px;\n}\n\n#hero-extra .hero__extra-img {\n    padding-top: 23rem;\n}\n\n.animate-relaxation {\n    -webkit-animation: animate-relaxation 10s linear both infinite;\n    animation: animate-relaxation 10s linear both infinite;\n}\n\nimg.hero__extra-img  {\n    height: auto;\n    border: 0;\n    max-width: 60px;\n    margin: 10px 0px 0px;\n}\n\n@keyframes animate-relaxation {\n\n    0%{\n        -webkit-transform: translateX(-15px);\n        transform: translateX(-15px);\n    }\n\n    25%{\n        -webkit-transform: translateX(107.5px);\n        transform: translateX(107.5px);\n    }\n\n    50% {\n        -webkit-transform: translateX(230px);\n        transform: translateX(230px);\n    }\n\n    75% {\n        -webkit-transform: translateX(107.5px);\n        transform: translateX(107.5px);\n    }\n\n    100% {\n        -webkit-transform: translateX(-15px);\n        transform: translateX(-15px);\n    }\n}\n\nform .custom-input {\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #fff;\n}\n\nform label {\n    color: #fff;\n}\n\n.lds-ellipsis {\n    display: inline-block;\n    width: 64px;\n    height: 64px;\n    position: relative;\n}\n.lds-ellipsis div {\n    position: absolute;\n    top: 27px;\n    width: 11px;\n    height: 11px;\n    border-radius: 50%;\n    background: #fff;\n    animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.lds-ellipsis div:nth-child(1) {\n    left: 6px;\n    animation: lds-ellipsis1 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(2) {\n    left: 6px;\n    animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(3) {\n    left: 26px;\n    animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(4) {\n    left: 45px;\n    animation: lds-ellipsis3 0.6s infinite;\n}\n@keyframes lds-ellipsis1 {\n    0% {\n        transform: scale(0);\n    }\n    100% {\n        transform: scale(1);\n    }\n}\n@keyframes lds-ellipsis3 {\n    0% {\n        transform: scale(1);\n    }\n    100% {\n        transform: scale(0);\n    }\n}\n@keyframes lds-ellipsis2 {\n    0% {\n        transform: translate(0, 0);\n    }\n    100% {\n        transform: translate(19px, 0);\n    }\n}\n\n.loader_content {\n    height: auto;\n    position: relative;\n    width: 100%;\n    text-align: center;\n    margin: -17px 0px;\n}\n\n", ""]);
+exports.push([module.i, "body {\n    width: 300px;\n    padding: 0;\n    overflow-x: hidden;\n    margin: 0;\n    background: linear-gradient(140deg, #1840D0 16%, rgba(0, 0, 0, 0) 24%), linear-gradient(30deg, #244FEA 0%, #173FCD 100%);\n}\n\nform {\n    margin: 15px;\n}\n\n#hero-extra .hero__extra-img {\n    padding-top: 23rem;\n}\n\n.animate-relaxation {\n    -webkit-animation: animate-relaxation 10s linear both infinite;\n    animation: animate-relaxation 10s linear both infinite;\n}\n\nimg.hero__extra-img  {\n    height: auto;\n    border: 0;\n    max-width: 60px;\n    margin: 10px 0px 0px;\n}\n\n@keyframes animate-relaxation {\n\n    0%{\n        -webkit-transform: translateX(-15px);\n        transform: translateX(-15px);\n    }\n\n    25%{\n        -webkit-transform: translateX(107.5px);\n        transform: translateX(107.5px);\n    }\n\n    50% {\n        -webkit-transform: translateX(230px);\n        transform: translateX(230px);\n    }\n\n    75% {\n        -webkit-transform: translateX(107.5px);\n        transform: translateX(107.5px);\n    }\n\n    100% {\n        -webkit-transform: translateX(-15px);\n        transform: translateX(-15px);\n    }\n}\n\nform .custom-input {\n    color: #fff;\n    background-color: transparent;\n    border: 1px solid #fff;\n}\n\nform label {\n    color: #fff;\n}\n\n.lds-ellipsis {\n    display: inline-block;\n    width: 64px;\n    height: 64px;\n    position: relative;\n}\n.lds-ellipsis div {\n    position: absolute;\n    top: 27px;\n    width: 11px;\n    height: 11px;\n    border-radius: 50%;\n    background: #fff;\n    animation-timing-function: cubic-bezier(0, 1, 1, 0);\n}\n.lds-ellipsis div:nth-child(1) {\n    left: 6px;\n    animation: lds-ellipsis1 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(2) {\n    left: 6px;\n    animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(3) {\n    left: 26px;\n    animation: lds-ellipsis2 0.6s infinite;\n}\n.lds-ellipsis div:nth-child(4) {\n    left: 45px;\n    animation: lds-ellipsis3 0.6s infinite;\n}\n@keyframes lds-ellipsis1 {\n    0% {\n        transform: scale(0);\n    }\n    100% {\n        transform: scale(1);\n    }\n}\n@keyframes lds-ellipsis3 {\n    0% {\n        transform: scale(1);\n    }\n    100% {\n        transform: scale(0);\n    }\n}\n@keyframes lds-ellipsis2 {\n    0% {\n        transform: translate(0, 0);\n    }\n    100% {\n        transform: translate(19px, 0);\n    }\n}\n\n.loader_content {\n    height: auto;\n    position: relative;\n    width: 100%;\n    text-align: center;\n    margin: -17px 0px;\n}\n\n.options input#button-options {\n    width: auto!important;\n    max-width: 100%!important;\n}\n\ninput#startTime, input#endTime{\n    margin-left: 0.8rem;\n    border: 1px solid #fff;\n    background: transparent;\n    color: #fff;\n    padding: 4px 5px;\n    font-size: 1rem;\n    font-weight: 400;\n    line-height: 1.5;\n    border-radius: 0.25rem;\n}\n\n.form-group .col-6{\n    text-align: center;\n}\n\nbody.options {\n    max-width: 500px;\n    width: 100%;\n    background-color: #1840D0;\n    margin: 0 auto;\n    height: 100%;\n}\n\nhtml{\n    height: 100%;\n}", ""]);
 
 
 /***/ }),

@@ -59,15 +59,15 @@ class Options extends React.Component {
 
 
                 {!this.state.enableCustomHourChecked ?
-                    <div className="form-group">
-                        <div className="form-group">
+                    <div className="form-group row mb-4">
+                        <div className="col-6">
                             <label htmlFor="startTime">Start Time</label>
                             <input type="time" id="startTime" name="startTime" style={{marginLeft: '0.8rem'}}
                                    min="08:00" max="20:00"
                                    onChange={this.handleChange} required/>
                         </div>
 
-                        <div className="form-group">
+                        <div className="col-6">
                             <label htmlFor="endTime">End Time</label>
                             <input type="time" id="endTime" name="endTime" style={{marginLeft: '0.8rem'}}
                                    min="08:00" max="20:00"
