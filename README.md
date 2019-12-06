@@ -7,4 +7,3 @@ Chrome extension clockify
 - enable developer mode
 - click on upload extension unpacked and upload the build of project
 - set the api kei in option of extension
-- ICCHEALEAO
