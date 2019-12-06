@@ -1,4 +1,4 @@
-# clockify
+# clockify extension
 Chrome extension clockify
 
 - download the chrome extension
