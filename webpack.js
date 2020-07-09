@@ -24,7 +24,7 @@ const config = {
                 viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
                 "theme-color": "#000000"
             },
-            manifest: "manifest.json",
+            manifest: "chrome/manifest.json",
             filename: "index.html",
             template: "./static/index.html",
             hash: true
