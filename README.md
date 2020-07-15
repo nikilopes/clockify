@@ -17,4 +17,4 @@ For run the build of app:
 
 `cd /clockify`
 
-`npmr run prod`
+`npm run prod`
