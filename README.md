@@ -8,11 +8,13 @@ For run the extension follow this steps:
 - go to chrome://extensions/
 - enable developer mode
 - click on upload extension unpacked and upload the build of project
-- set the api kei, choose if you want to ancable the custom hours managemnt
+- set the api kei, choose if you want to enable the custom hours managemnt
 - choose your project, add the description and send
 
 
 For run the build of app:
 
+
 `cd /clockify`
-`npmr run prod`
+
+`npm run prod`
